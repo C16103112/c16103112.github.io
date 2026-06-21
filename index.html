@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>晋祠博物馆 - 皇家古祠 三晋文脉</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", SimSun, serif;
+        }
+        body {
+            background-color: #f8f5ee;
+            color: #333;
+        }
+        /* 导航栏 */
+        header {
+            background: #8b2323;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+        .nav-wrap {
+            width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        .logo {
+            color: #fff;
+            font-size: 26px;
+            font-weight: bold;
+            line-height: 70px;
+        }
+        .nav-list {
+            display: flex;
+            list-style: none;
+        }
+        .nav-list li a {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            padding: 0 25px;
+            line-height: 70px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        .nav-list li a:hover {
+            background: #a42c2c;
+        }
+        /* 首页轮播 */
+        #home {
+            width: 100%;
+            height: 520px;
+            background: linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)), url("./images/2.jpg") center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            text-align: center;
+        }
+        #home h1 {
+            font-size: 52px;
+            margin-bottom: 15px;
+            letter-spacing: 6px;
+        }
+        #home p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+        .btn-view {
+            padding: 12px 36px;
+            background: #8b2323;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+        .btn-view:hover {
+            background: #c43030;
+        }
+        /* 通用区块 */
+        section {
+            width: 1200px;
+            margin: 80px auto;
+            padding: 0 20px;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            color: #8b2323;
+            margin-bottom: 50px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #8b2323;
+            display: inline-block;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        /* 景区介绍 */
+        #intro .content {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+        .intro-img {
+            width: 55%;
+            height: 400px;
+          object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px #ccc;
+        }
+        .intro-text {
+            width: 45%;
+            line-height: 2;
+            font-size: 16px;
+        }
+        .intro-text h3 {
+            color: #8b2323;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+        .three-wonder {
+            margin-top: 40px;
+        }
+        .wonder-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+        .wonder-item {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e0d6c2;
+            display: flex;
+            flex-direction: column;
+            transition: 0.3s;
+        }
+        .wonder-item:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 6px 18px #ddd;
+        }
+        .wonder-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+        .wonder-item h4 {
+            color: #8b2323;
+            margin-bottom: 10px;
+        }
+        /* 游览路线 */
+        #route {
+            background: #fff;
+            padding: 60px 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px #ddd;
+        }
+        .route-box {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .route-card {
+            border: 1px solid #e0d6c2;
+            padding: 25px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        .route-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 6px 18px #ddd;
+        }
+        .route-card h4 {
+            color: #8b2323;
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+        .route-card p {
+            line-height: 1.8;
+            color: #555;
+        }
+        /* 游客服务 */
+        #service .service-wrap {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+        .service-item {
+            text-align: center;
+            padding: 30px 15px;
+            background: #fff;
+            border-radius: 8px;
+        }
+        .service-item h4 {
+            margin: 12px 0;
+            color: #8b2323;
+        }
+        .service-item p {
+            font-size: 14px;
+            color: #666;
+        }
+        .ticket-info, .traffic-info {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .ticket-info h3,.traffic-info h3 {
+            color: #8b2323;
+            margin-bottom: 15px;
+        }
+        /* 联系我们 */
+        #contact {
+            background: #fff;
+            padding: 60px 20px;
+            border-radius: 10px;
+        }
+        .contact-box {
+            display: flex;
+            gap: 50px;
+        }
+        .contact-info {
+            width: 40%;
+            line-height: 2.2;
+            font-size: 16px;
+        }
+        .contact-info h3 {
+            color: #8b2323;
+            margin-bottom: 20px;
+        }
+        .form-box {
+            width: 60%;
+        }
+        .form-box input, .form-box textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 18px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 15px;
+        }
+        .form-box button {
+            width: 100%;
+            padding: 14px;
+            background: #8b2323;
+            color: #fff;
+            border: none;
+            font-size: 17px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        /* 底部 */
+        footer {
+            background: #441414;
+            color: #ddd;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        /* 移动端适配 */
+        @media(max-width:1200px){
+            .nav-wrap, section {
+                width: 100%;
+            }
+        }
+        @media(max-width:768px){
+            .nav-list li a {
+                padding: 0 12px;
+                font-size: 14px;
+            }
+            #home h1 {
+                font-size: 32px;
+            }
+            #intro .content, .contact-box {
+                flex-direction: column;
+            }
+            .intro-img, .intro-text, .contact-info, .form-box {
+                width: 100%;
+            }
+            .route-box, .service-wrap,.wonder-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="nav-wrap">
+            <div class="logo">晋祠博物馆</div>
+            <ul class="nav-list">
+                <li><a href="#home">首页</a></li>
+                <li><a href="#intro">景区介绍</a></li>
+                <li><a href="#route">游览路线</a></li>
+                <li><a href="#service">游客服务</a></li>
+                <li><a href="#contact">联系我们</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- 首页模块 -->
+    <div id="home">
+        <h1>三晋第一胜境 · 千年晋祠</h1>
+        <p>周柏唐槐、宋代侍女、难老清泉，品读晋阳三千年文脉</p>
+        <a href="#intro" class="btn-view">了解景区详情</a>
+    </div>
+
+    <!-- 景区介绍模块【补充晋祠三绝板块】 -->
+    <section id="intro">
+        <h2 class="section-title">景区介绍</h2>
+        <div class="content">
+            <img class="intro-img" src="./images/7.png" alt="晋祠圣母殿">
+            <div class="intro-text">
+                <h3>晋祠简介</h3>
+                <p>晋祠坐落于山西太原晋源区，始建于西周，是为纪念晋国开国诸侯唐叔虞而建，集古祠、古园林、古雕塑、古碑刻于一体，被誉为"山西古建筑博物馆"。</p>
+                <p>景区核心看点：圣母殿宋代彩塑侍女像、周柏唐槐、难老泉并称"晋祠三绝"。殿宇错落，泉水潺潺，千年古树苍翠，碑碣林立，融合北方皇家园林与祠堂建筑特色，承载晋阳千年历史文化。</p>
+                <p>晋祠现为国家AAAA级旅游景区、全国重点文物保护单位，是山西文旅地标，海内外游客探访三晋文化必到之地。</p>
+            </div>
+        </div>
+        <div class="three-wonder">
+            <h3 style="text-align:center;color:#8b2323;margin-bottom:30px;">晋祠三绝</h3>
+            <div class="wonder-list">
+                <div class="wonder-item">
+                    <img src="./images/8.png" alt="宋代侍女彩塑">
+                    <h4>一绝：宋代侍女彩塑</h4>
+                    <p>圣母殿内43尊宋代泥塑侍女，神态各异、栩栩如生，是中国古代雕塑艺术巅峰之作。</p>
+                </div>
+                <div class="wonder-item">
+                    <img src="./images/6.jpg" alt="难老泉">
+                    <h4>二绝：难老泉</h4>
+                    <p>常年恒温17℃，泉水生生不息，"难老"之名由此而来，是晋祠水系核心景观。</p>
+                </div>
+                <div class="wonder-item">
+                    <img src="./images/9.jpg" alt="周柏唐槐">
+                    <h4>三绝：周柏唐槐</h4>
+                    <p>西周古柏、唐代古槐历经千年风霜，苍劲挺拔，见证晋祠千年兴衰。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 游览路线模块 -->
+    <section id="route">
+        <h2 class="section-title">游览路线</h2>
+        <div class="route-box">
+            <div class="route-card">
+                <h4>经典半日游（2小时）</h4>
+                <p>大门→水镜台→会仙桥→金人台→圣母殿（晋祠三绝）→难老泉→周柏唐槐→文昌宫</p>
+                <p>适合短途出行，打卡核心文物景点，感受晋祠标志性景观。</p>
+            </div>
+            <div class="route-card">
+                <h4>深度全日游（4小时）</h4>
+                <p>半日路线基础上增加：唐碑亭、贞观宝翰、鱼沼飞梁、苗裔堂、晋祠博物馆展厅、浮屠院</p>
+                <p>完整浏览古建筑、石刻、文物展馆，适合历史文化爱好者。</p>
+            </div>
+            <div class="route-card">
+                <h4>亲子休闲路线</h4>
+                <p>大门→难老泉水系观景→园林步道→古柏广场→文创商店→休息茶座</p>
+                <p>平缓步道，水景优美，兼顾休憩与轻游览，适合老人、儿童。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 游客服务模块【补充票价、交通】 -->
+    <section id="service">
+        <h2 class="section-title">游客服务</h2>
+        <div class="service-wrap">
+            <div class="service-item">
+                <h4>票务中心</h4>
+                <p>线上线下购票、优惠票办理、退票咨询</p>
+            </div>
+            <div class="service-item">
+                <h4>讲解服务</h4>
+                <p>人工导游、电子讲解器、多语种导览</p>
+            </div>
+            <div class="service-item">
+                <h4>便民设施</h4>
+                <p>母婴室、无障碍通道、行李寄存、饮水点</p>
+            </div>
+            <div class="service-item">
+                <h4>文创餐饮</h4>
+                <p>晋祠文创商店、特色山西小吃、休息茶厅</p>
+            </div>
+        </div>
+        <!-- 新增票价信息 -->
+        <div class="ticket-info">
+            <h3>门票价格与优惠政策</h3>
+            <p>全价票：80元/人</p>
+            <p>半价票：40元/人（全日制大中小学生凭学生证）</p>
+            <p>免票人群：60周岁以上老人、1.2米以下儿童、军人、残疾人凭有效证件免入园门票</p>
+        </div>
+        <!-- 新增交通指南 -->
+        <div class="traffic-info">
+            <h3>交通出行指南</h3>
+            <p>公交：太原市区乘坐79路、308路、804路、856路直达晋祠公园站</p>
+            <p>自驾：导航搜索"晋祠博物馆"，景区配套大型免费停车场</p>
+            <p>地铁：地铁1号线转公交308路直达景区</p>
+        </div>
+    </section>
+
+    <!-- 联系我们模块 -->
+    <section id="contact">
+        <h2 class="section-title">联系我们</h2>
+        <div class="contact-box">
+            <div class="contact-info">
+                <h3>景区联系方式</h3>
+                <p>📍地址：山西省太原市晋源区晋祠镇晋祠路</p>
+                <p>☎咨询热线：0351-6020014</p>
+                <p>⏰开放时间：8:00-18:00（春夏4.1-10.31）；8:30-17:30（秋冬11.1-次年3.31）</p>
+                <p>📩官方邮箱：jinci@shanxi.cn</p>
+                <p>🌐官方公众号：晋祠博物馆</p>
+            </div>
+            <div class="form-box">
+                <input type="text" placeholder="您的姓名">
+                <input type="tel" placeholder="联系电话">
+                <textarea rows="5" placeholder="留言咨询/团队研学/商业合作内容"></textarea>
+                <button>提交留言</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <p>晋祠博物馆官方宣传网站 ©2026 版权所有 | 三晋文化宣传展示平台</p>
+    </footer>
+</body>
+</html>
